@@ -16,6 +16,58 @@ document.addEventListener("DOMContentLoaded", () => {
     card.className = "player-card";
     card.tabIndex = 0;
 
+    // Team colors
+    const teamColors = {
+      LAL: { primary: "#552583", secondary: "#FDB927" },
+      GSW: { primary: "#1D428A", secondary: "#FFC72C" },
+      MIL: { primary: "#00471B", secondary: "#EEE1C6" },
+      DEN: { primary: "#0E2240", secondary: "#FEC524" },
+      OKC: { primary: "#007AC1", secondary: "#EF3B24" },
+      BOS: { primary: "#007A33", secondary: "#FFB51D" },
+      PHX: { primary: "#1D1160", secondary: "#E56020" },
+      DAL: { primary: "#00538C", secondary: "#B8C4CA" },
+      MIN: { primary: "#0C2340", secondary: "#78BE20" },
+      SAC: { primary: "#5A2D81", secondary: "#63727A" },
+      NYK: { primary: "#006BB6", secondary: "#F58426" },
+      CHA: { primary: "#1D1160", secondary: "#00E0FF" },
+      ORL: { primary: "#0077C0", secondary: "#C4CED4" },
+      PHI: { primary: "#006BB6", secondary: "#ED174C" },
+      CLE: { primary: "#860038", secondary: "#FDBB30" },
+      BKN: { primary: "#000000", secondary: "#FFFFFF" },
+      MIA: { primary: "#98002E", secondary: "#F9A01B" },
+      DET: { primary: "#C8102E", secondary: "#1D42BA" },
+      SAS: { primary: "#000000", secondary: "#C4CED4" },
+      LAC: { primary: "#C8102E", secondary: "#1D428A" },
+      NOP: { primary: "#0C2340", secondary: "#C8102E" },
+      TOR: { primary: "#CE1141", secondary: "#A1A1A4" },
+    };
+
+    // Get team colors with fallback
+    const colors = teamColors[player.Team] || {
+      primary: "#1d428a",
+      secondary: "#c8102e",
+    };
+
+    // Convert hex to RGB for box-shadow
+    const hexToRgb = (hex) => {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result
+        ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16),
+          }
+        : null;
+    };
+
+    const secondaryRgb = hexToRgb(colors.secondary);
+    const rgbString = `${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}`;
+
+    // Apply team colors to card
+    card.style.setProperty("--team-primary", colors.primary);
+    card.style.setProperty("--team-secondary", colors.secondary);
+    card.style.setProperty("--team-secondary-rgb", rgbString);
+
     // Calculate efficiency and shooting percentages
     const effRating = (
       (player.PTS + player.REB + player.AST) /
@@ -31,12 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-front">
                     <span class="flip-icon" aria-hidden="true">↻</span>
                     <div class="player-header">
-                        <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/${getPlayerImageId(
-                          player.Player
-                        )}.png"
-                             alt="${player.Player}"
-                             class="player-image"
-                             onerror="this.src='placeholder.jpg'">
+                        <div class="player-image-container">
+                            <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/${getPlayerImageId(
+                              player.Player
+                            )}.png"
+                                 alt="${player.Player}"
+                                 class="player-image"
+                                 onerror="this.src='placeholder.jpg'">
+                        </div>
                         <div class="player-info">
                             <h2>${player.Player}</h2>
                             <p class="player-team">${player.Team}</p>
