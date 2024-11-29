@@ -99,11 +99,11 @@ h1 {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 1600px;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
   margin: 0 auto;
+  max-width: 400px;
 }
 
 .player-card {
@@ -317,14 +317,29 @@ h1 {
   letter-spacing: 0.05em;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .gallery {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    padding: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 900px;
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    padding: 2.5rem;
+    max-width: 1400px;
+  }
+
+  h1 {
+    font-size: 4rem;
   }
 }
 
