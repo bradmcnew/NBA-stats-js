@@ -143,6 +143,7 @@ h1 {
   padding: 1.5rem;
   box-shadow: var(--shadow);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 }
 
 .card-front::before,
@@ -153,10 +154,20 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--card-gradient);
+  background: linear-gradient(
+    145deg,
+    var(--team-primary) 0%,
+    var(--team-secondary) 100%
+  );
   opacity: 0.1;
   z-index: -1;
   border-radius: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.player-card:hover .card-front::before,
+.player-card:hover .card-back::before {
+  opacity: 0.15;
 }
 
 .card-back {
@@ -395,7 +406,7 @@ h1 {
   :root {
     --dark: #ffffff;
     --light: #1a1a1a;
-    --glass: rgba(0, 0, 0, 0.1);
+    --glass: rgba(0, 0, 0, 0.3);
     --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
     --text-primary: var(--light);
     --text-secondary: rgba(0, 0, 0, 0.7);
@@ -410,7 +421,12 @@ h1 {
 
   .card-front::before,
   .card-back::before {
-    opacity: 0.15;
+    opacity: 0.2;
+  }
+
+  .player-card:hover .card-front::before,
+  .player-card:hover .card-back::before {
+    opacity: 0.25;
   }
 
   .stat-item,
@@ -441,5 +457,46 @@ h1 {
   .card-back {
     background: var(--glass);
     color: var(--text-primary);
+  }
+}
+
+.image-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.player-image {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.player-image.loaded {
+  opacity: 1;
+}
+
+/* Adjust for light mode */
+@media (prefers-color-scheme: light) {
+  .image-skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
   }
 }
