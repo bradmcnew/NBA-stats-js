@@ -511,3 +511,51 @@ h1 {
     );
   }
 }
+
+.filter-controls {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#stat-filter {
+  background: var(--glass);
+  color: var(--light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+#stat-filter:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#stat-filter option {
+  background: var(--dark);
+  color: var(--light);
+  padding: 0.5rem;
+}
+
+/* Light mode adjustments */
+@media (prefers-color-scheme: light) {
+  #stat-filter {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--dark);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  #stat-filter:hover {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  #stat-filter option {
+    background: var(--light);
+    color: var(--dark);
+  }
+}

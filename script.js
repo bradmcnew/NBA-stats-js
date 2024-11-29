@@ -1,15 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
   const gallery = document.querySelector(".gallery");
+  const statFilter = document.getElementById("stat-filter");
+  let currentPlayers = [];
 
   fetch("players.json")
     .then((response) => response.json())
     .then((players) => {
-      players.forEach((player) => {
-        const card = createPlayerCard(player);
-        gallery.appendChild(card);
+      currentPlayers = players;
+      renderPlayers(currentPlayers);
+
+      // Add filter event listener
+      statFilter.addEventListener("change", () => {
+        const sortedPlayers = [...currentPlayers].sort((a, b) => {
+          const statA = parseFloat(a[statFilter.value]);
+          const statB = parseFloat(b[statFilter.value]);
+          return statB - statA; // Sort in descending order
+        });
+        renderPlayers(sortedPlayers);
       });
     })
     .catch((error) => console.error("Error loading players:", error));
+
+  function renderPlayers(players) {
+    gallery.innerHTML = "";
+    players.forEach((player) => {
+      const card = createPlayerCard(player);
+      gallery.appendChild(card);
+    });
+  }
 
   function createPlayerCard(player) {
     const card = document.createElement("div");
