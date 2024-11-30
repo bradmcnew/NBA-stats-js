@@ -16,10 +16,10 @@ A responsive web application that displays NBA player statistics in an interacti
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
-- NBA Stats API
 
 ## Project Structure
 
+```plaintext
 project/
 ├── css/
 │ └── styles.css
@@ -30,6 +30,7 @@ project/
 │ ├── players.json
 │ └── teamColors.json
 └── index.html
+```
 
 ## Getting Started
 
