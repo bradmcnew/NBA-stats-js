@@ -58,6 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
       LAC: { primary: "#C8102E", secondary: "#1D428A" },
       NOP: { primary: "#0C2340", secondary: "#C8102E" },
       TOR: { primary: "#CE1141", secondary: "#A1A1A4" },
+      CHO: { primary: "#00788C", secondary: "#1D1160" },
+      IND: { primary: "#002D62", secondary: "#FDBB30" },
+      WAS: { primary: "#002B5C", secondary: "#E31837" },
+      UTA: { primary: "#002B5C", secondary: "#00471B" },
+      MEM: { primary: "#5D76A3", secondary: "#12173F" },
+      ATL: { primary: "#E03A3E", secondary: "#C4CED4" },
+      OKC: { primary: "#007AC1", secondary: "#EF3B24" },
     };
 
     // Get team colors with fallback
@@ -103,9 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="player-header">
                         <div class="player-image-container">
                             <div class="image-skeleton"></div>
-                            <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/${getPlayerImageId(
-                              player.Player
-                            )}.png"
+                            <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/${player.id}.png"
                                  alt="${player.Player}"
                                  class="player-image"
                                  loading="lazy"
@@ -115,9 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="player-info">
                             <h2>${player.Player}</h2>
                             <p class="player-team">${player.Team}</p>
-                            <p class="player-meta">Age: ${player.Age} | GP: ${
-      player.GP
-    }</p>
+                            <p class="player-meta">Age: ${player.Age} | GP: ${player.GP}</p>
                         </div>
                     </div>
                     <div class="stats-grid">
@@ -138,21 +141,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="stat-row">
                             <div class="stat-group">
                                 <div class="mini-stat">
-                                    <span class="mini-value">${
-                                      player.STL
-                                    }</span>
+                                    <span class="mini-value">${player.STL}</span>
                                     <span class="mini-label">STL</span>
                                 </div>
                                 <div class="mini-stat">
-                                    <span class="mini-value">${
-                                      player.BLK
-                                    }</span>
+                                    <span class="mini-value">${player.BLK}</span>
                                     <span class="mini-label">BLK</span>
                                 </div>
                                 <div class="mini-stat">
-                                    <span class="mini-value">${
-                                      player.TOV
-                                    }</span>
+                                    <span class="mini-value">${player.TOV}</span>
                                     <span class="mini-label">TOV</span>
                                 </div>
                             </div>
@@ -163,9 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <span class="mini-label">MIN</span>
                             </div>
                             <div class="record-stat">
-                                <span class="record-value">${player.W}-${
-      player.L
-    }</span>
+                                <span class="record-value">${player.W}-${player.L}</span>
                                 <span class="record-label">Record</span>
                             </div>
                         </div>
@@ -224,42 +219,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     return card;
-  }
-
-  // Helper function to get player image IDs (you'll need to maintain a mapping of players to their NBA.com image IDs)
-  function getPlayerImageId(playerName) {
-    const playerIds = {
-      "Giannis Antetokounmpo": "203507",
-      "LaMelo Ball": "1630163",
-      "Nikola Jokić": "203999",
-      "Shai Gilgeous-Alexander": "1628983",
-      "Anthony Davis": "203076",
-      "Paolo Banchero": "1631094",
-      "Jayson Tatum": "1628369",
-      "Luka Dončić": "1629029",
-      "Anthony Edwards": "1630162",
-      "De'Aaron Fox": "1628368",
-      "Kevin Durant": "201142",
-      "Karl-Anthony Towns": "1626157",
-      "Damian Lillard": "203081",
-      "Tyrese Maxey": "1630178",
-      "Jalen Brunson": "1628973",
-      "Jaylen Brown": "1627759",
-      "Donovan Mitchell": "1628378",
-      "Cam Thomas": "1630560",
-      "Devin Booker": "1626164",
-      "Kyrie Irving": "202681",
-      "Tyler Herro": "1629639",
-      "Cade Cunningham": "1630595",
-      "Victor Wembanyama": "1641705",
-      "Franz Wagner": "1630532",
-      "Norman Powell": "1626181",
-      "LeBron James": "2544",
-      "Brandon Ingram": "1627742",
-      "RJ Barrett": "1629628",
-      "Zion Williamson": "1629627",
-      "DeMar DeRozan": "201942",
-    };
-    return playerIds[playerName] || "1";
   }
 });
