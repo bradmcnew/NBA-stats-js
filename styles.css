@@ -527,3 +527,23 @@ h1 {
   color: var(--light);
   padding: 0.5rem;
 }
+
+.nav-link {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: var(--glass);
+  color: var(--light);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-link:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

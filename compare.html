@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NBA Player Comparison</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="compare.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background-pattern"></div>
+    <header>
+      <h1>Player Comparison</h1>
+      <nav>
+        <a href="index.html" class="nav-link">Back to Gallery</a>
+      </nav>
+    </header>
+    <main>
+      <div class="comparison-container">
+        <div class="player-selectors">
+          <div class="selector-group">
+            <label for="player1">Player 1</label>
+            <select id="player1" aria-label="Select first player"></select>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="selector-group">
+            <label for="player2">Player 2</label>
+            <select id="player2" aria-label="Select second player"></select>
+          </div>
+        </div>
+        <div class="comparison-content">
+          <div id="player1-card" class="comparison-card"></div>
+          <div class="stat-comparison"></div>
+          <div id="player2-card" class="comparison-card"></div>
+        </div>
+      </div>
+    </main>
+    <script src="compare.js"></script>
+  </body>
+</html>
