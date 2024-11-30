@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const [playersData, colorsData] = await Promise.all([
-      fetch("players.json").then((response) => response.json()),
-      fetch("teamColors.json").then((response) => response.json()),
+      fetch("../data/players.json").then((response) => response.json()),
+      fetch("../data/teamColors.json").then((response) => response.json()),
     ]);
 
     players = playersData;
