@@ -22,6 +22,7 @@ A responsive web application that displays NBA player statistics in an interacti
 ```plaintext
 project/
 ├── css/
+│ ├── compare.css
 │ └── styles.css
 ├── scripts/
 │ ├── script.js
@@ -29,6 +30,7 @@ project/
 ├── data/
 │ ├── players.json
 │ └── teamColors.json
+├── compare.html
 └── index.html
 ```
 
