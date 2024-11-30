@@ -93,12 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="flip-icon" aria-hidden="true">↻</span>
                     <div class="player-header">
                         <div class="player-image-container">
-                            <div class="image-skeleton"></div>
-                            <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/${player.id}.png"
+                            <img src="https://cdn.nba.com/headshots/nba/latest/260x190/${player.id}.png"
                                  alt="${player.Player}"
                                  class="player-image"
                                  loading="lazy"
-                                 onload="this.classList.add('loaded')"
                                  onerror="this.src='placeholder.jpg'">
                         </div>
                         <div class="player-info">
