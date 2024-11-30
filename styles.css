@@ -1,3 +1,4 @@
+/* CSS Variables */
 :root {
   --primary: #1d428a;
   --secondary: #c8102e;
@@ -8,12 +9,14 @@
   --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
+/* Base Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Global Styles start dark mode */
 body {
   font-family: "Poppins", sans-serif;
   background-color: var(--dark);
@@ -22,7 +25,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Background pattern */
+/* Background Pattern & Effects */
 .background-pattern {
   position: fixed;
   top: 0;
@@ -75,6 +78,7 @@ body {
   z-index: -1;
 }
 
+/* Header Styles */
 header {
   text-align: center;
   padding: 3rem 1rem;
@@ -97,6 +101,7 @@ h1 {
   margin-top: -0.5rem;
 }
 
+/* Card Grid Layout */
 .gallery {
   display: grid;
   grid-template-columns: 1fr;
@@ -106,6 +111,7 @@ h1 {
   max-width: 400px;
 }
 
+/* Card Container & 3D Effects */
 .player-card {
   position: relative;
   height: 520px;
@@ -122,10 +128,12 @@ h1 {
   transform-style: preserve-3d;
 }
 
+/* Card Flip Animation */
 .player-card.flipped .card-inner {
   transform: rotateY(180deg);
 }
 
+/* Card Face Styles (Front & Back) */
 .card-front,
 .card-back {
   position: absolute;
@@ -141,6 +149,7 @@ h1 {
   overflow: hidden;
 }
 
+/* Card Background Gradient */
 .card-front::before,
 .card-back::before {
   content: "";
@@ -172,6 +181,7 @@ h1 {
   justify-content: space-between;
 }
 
+/* Flip Icon */
 .flip-icon {
   position: absolute;
   top: 1rem;

@@ -1,15 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // DOM elements
   const gallery = document.querySelector(".gallery");
   const statFilter = document.getElementById("stat-filter");
-  let currentPlayers = [];
 
-  fetch("players.json")
-    .then((response) => response.json())
-    .then((players) => {
+  // State management
+  let currentPlayers = [];
+  let teamColors = {};
+
+  // Fetch and initialize data from JSON files
+  async function initializeData() {
+    try {
+      const [players, colors] = await Promise.all([
+        fetch("players.json").then((response) => response.json()),
+        fetch("teamColors.json").then((response) => response.json()),
+      ]);
+
       currentPlayers = players;
+      teamColors = colors;
       renderPlayers(currentPlayers);
 
-      // Add filter event listener
+      // Initialize stat filter functionality
       statFilter.addEventListener("change", () => {
         const sortedPlayers = [...currentPlayers].sort((a, b) => {
           const statA = parseFloat(a[statFilter.value]);
@@ -18,9 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         renderPlayers(sortedPlayers);
       });
-    })
-    .catch((error) => console.error("Error loading players:", error));
+    } catch (error) {
+      console.error("Error loading data:", error);
+    }
+  }
 
+  initializeData();
+
+  /**
+   * Renders all player cards in the gallery
+   * @param {Array} players - Array of player objects to render
+   */
   function renderPlayers(players) {
     gallery.innerHTML = "";
     players.forEach((player) => {
@@ -29,51 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Creates a player card element with stats and styling
   function createPlayerCard(player) {
     const card = document.createElement("div");
     card.className = "player-card";
     card.tabIndex = 0;
 
-    // Team colors
-    const teamColors = {
-      LAL: { primary: "#552583", secondary: "#FDB927" },
-      GSW: { primary: "#1D428A", secondary: "#FFC72C" },
-      MIL: { primary: "#00471B", secondary: "#EEE1C6" },
-      DEN: { primary: "#0E2240", secondary: "#FEC524" },
-      OKC: { primary: "#007AC1", secondary: "#EF3B24" },
-      BOS: { primary: "#007A33", secondary: "#FFB51D" },
-      PHX: { primary: "#1D1160", secondary: "#E56020" },
-      DAL: { primary: "#00538C", secondary: "#B8C4CA" },
-      MIN: { primary: "#0C2340", secondary: "#78BE20" },
-      SAC: { primary: "#5A2D81", secondary: "#63727A" },
-      NYK: { primary: "#006BB6", secondary: "#F58426" },
-      CHA: { primary: "#1D1160", secondary: "#00E0FF" },
-      ORL: { primary: "#0077C0", secondary: "#C4CED4" },
-      PHI: { primary: "#006BB6", secondary: "#ED174C" },
-      CLE: { primary: "#860038", secondary: "#FDBB30" },
-      BKN: { primary: "#000000", secondary: "#FFFFFF" },
-      MIA: { primary: "#98002E", secondary: "#F9A01B" },
-      DET: { primary: "#C8102E", secondary: "#1D42BA" },
-      SAS: { primary: "#000000", secondary: "#C4CED4" },
-      LAC: { primary: "#C8102E", secondary: "#1D428A" },
-      NOP: { primary: "#0C2340", secondary: "#C8102E" },
-      TOR: { primary: "#CE1141", secondary: "#A1A1A4" },
-      CHO: { primary: "#00788C", secondary: "#1D1160" },
-      IND: { primary: "#002D62", secondary: "#FDBB30" },
-      WAS: { primary: "#002B5C", secondary: "#E31837" },
-      UTA: { primary: "#002B5C", secondary: "#00471B" },
-      MEM: { primary: "#5D76A3", secondary: "#12173F" },
-      ATL: { primary: "#E03A3E", secondary: "#C4CED4" },
-      OKC: { primary: "#007AC1", secondary: "#EF3B24" },
-    };
-
-    // Get team colors with fallback
+    // Fallback team colors
     const colors = teamColors[player.Team] || {
       primary: "#1d428a",
       secondary: "#c8102e",
     };
 
-    // Convert hex to RGB for box-shadow
+    // Converts hex color to RGB values
     const hexToRgb = (hex) => {
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
       return result
@@ -85,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         : null;
     };
 
+    // Convert team colors for CSS variables
     const secondaryRgb = hexToRgb(colors.secondary);
     const rgbString = `${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}`;
 
@@ -93,16 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
     card.style.setProperty("--team-secondary", colors.secondary);
     card.style.setProperty("--team-secondary-rgb", rgbString);
 
-    // Calculate efficiency and shooting percentages
-    const effRating = (
-      (player.PTS + player.REB + player.AST) /
-      player.Min
-    ).toFixed(2);
+    // Calculate advanced statistics
     const trueShootingPct = (
       (player.PTS / (2 * (player.FGA + 0.44 * player.FTA))) *
       100
     ).toFixed(1);
 
+    // Generate card HTML structure
     card.innerHTML = `
             <div class="card-inner">
                 <div class="card-front">
@@ -205,12 +189,12 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-    // Add event listeners for card flipping
+    // Add interactivity
     card.addEventListener("click", () => {
       card.classList.toggle("flipped");
     });
 
-    // Add keyboard support
+    // Add keyboard accessibility
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
