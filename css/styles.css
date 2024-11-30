@@ -280,6 +280,7 @@ h1 {
   object-fit: cover;
   object-position: top center;
   background: var(--glass);
+  backdrop-filter: blur(8px);
 }
 
 .player-info h2 {
@@ -436,15 +437,18 @@ h1 {
     --accent: #005e27;
   }
 
+  /* Glass effect on background pattern */
   .background-pattern {
     opacity: 0.05;
   }
 
+  /* Glass effect on card backgrounds */
   .card-front::before,
   .card-back::before {
     opacity: 0.2;
   }
 
+  /* Glass effect on hover */
   .player-card:hover .card-front::before,
   .player-card:hover .card-back::before {
     opacity: 0.25;

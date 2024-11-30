@@ -11,10 +11,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   let teamColors = {};
 
   try {
-    const [playersData, colorsData] = await Promise.all([
-      fetch("../data/players.json").then((response) => response.json()),
-      fetch("../data/teamColors.json").then((response) => response.json()),
-    ]);
+    const playersResponse = await fetch("../data/players.json");
+    const playersData = await playersResponse.json();
+
+    const colorsResponse = await fetch("../data/teamColors.json");
+    const colorsData = await colorsResponse.json();
 
     players = playersData;
     teamColors = colorsData;
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
     sortedPlayers.forEach((player) => {
+      // Create options for each player
       const option1 = new Option(player.Player, player.id);
       const option2 = new Option(player.Player, player.id);
       player1Select.add(option1);

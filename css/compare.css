@@ -87,13 +87,13 @@
 
 .stat-value.better {
   color: #02ed6c;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.2rem;
 }
 
 .stat-value.worse {
   color: #ff9292;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.2rem;
 }
 
@@ -117,6 +117,10 @@
   }
 }
 
+.player-card {
+  height: 100px;
+}
+
 @media (min-width: 1038px) {
   .comparison-content {
     grid-template-columns: 1fr auto 1fr;
@@ -126,6 +130,10 @@
 
   .stat-comparison {
     order: 0;
+  }
+
+  .player-card {
+    height: 520px;
   }
 }
 

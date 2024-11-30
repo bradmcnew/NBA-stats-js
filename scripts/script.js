@@ -10,13 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch and initialize data from JSON files
   async function initializeData() {
     try {
-      const [players, colors] = await Promise.all([
-        fetch("../data/players.json").then((response) => response.json()),
-        fetch("../data/teamColors.json").then((response) => response.json()),
-      ]);
+      const playersResponse = await fetch("../data/players.json");
+      const playersData = await playersResponse.json();
 
-      currentPlayers = players;
-      teamColors = colors;
+      const colorsResponse = await fetch("../data/teamColors.json");
+      const colorsData = await colorsResponse.json();
+
+      currentPlayers = playersData;
+      teamColors = colorsData;
       renderPlayers(currentPlayers);
 
       // Initialize stat filter functionality
