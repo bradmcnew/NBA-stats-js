@@ -85,25 +85,22 @@
   text-align: center;
 }
 
-.better-stat {
-  color: #02ed6c;
-  font-weight: 600;
-}
-
 .stat-value.better {
   color: #02ed6c;
   font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .stat-value.worse {
-  color: #ff4d4d;
+  color: #ff9292;
   font-weight: 600;
+  font-size: 1.2rem;
 }
 
 /* For light theme */
 @media (prefers-color-scheme: light) {
   .selector-group label,
-  .stat-label {
+  .stat-value.better {
     color: #02401c;
   }
 
@@ -113,6 +110,10 @@
 
   p.player-team {
     color: #02401c;
+  }
+
+  .stat-value.worse {
+    color: #b71c1c;
   }
 }
 
