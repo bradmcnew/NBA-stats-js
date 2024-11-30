@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch and initialize data from JSON files
   async function initializeData() {
     try {
-      const playersResponse = await fetch("/data/players.json");
+      const playersResponse = await fetch("./data/players.json");
       const playersData = await playersResponse.json();
 
-      const colorsResponse = await fetch("/data/teamColors.json");
+      const colorsResponse = await fetch("./data/teamColors.json");
       const colorsData = await colorsResponse.json();
 
       currentPlayers = playersData;
