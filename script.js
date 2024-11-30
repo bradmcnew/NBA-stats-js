@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function createPlayerCard(player) {
     const card = document.createElement("div");
     card.className = "player-card";
+    // Add tabIndex for keyboard accessibility
     card.tabIndex = 0;
 
     // Fallback team colors
